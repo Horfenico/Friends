@@ -21,16 +21,14 @@ public class MainActivity extends ActionBarActivity {
     private String[] phoneno;
     private int count = 0;
 
-    private String tableName = DBHelper.tableName;
+    private String tableName = "Friends";
     private SQLiteDatabase newDB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         openAndQueryDatabase();
-
         displayResultList();
 
     }
@@ -66,7 +64,7 @@ public class MainActivity extends ActionBarActivity {
 
     private void openAndQueryDatabase() {
         try {
-            DBHelper dbHelper = new DBHelper(this.getApplicationContext());
+            DBHelper dbHelper = new DBHelper(this, null, null, 1);
             newDB = dbHelper.getWritableDatabase();
             Cursor c = newDB.rawQuery("SELECT Name FROM " +
                     tableName, null);
@@ -74,6 +72,7 @@ public class MainActivity extends ActionBarActivity {
             if (c != null) {
                 if (c.moveToFirst()) {
                     do {
+                        c.moveToFirst();
                         String Name = c.getString(c.getColumnIndex("Name"));
                         email[count] = c.getString(c.getColumnIndex("Email"));
                         phoneno[count] = c.getString(c.getColumnIndex("PhoneNumber"));
@@ -91,4 +90,5 @@ public class MainActivity extends ActionBarActivity {
         newDB.close();
 
     }
+
 }
