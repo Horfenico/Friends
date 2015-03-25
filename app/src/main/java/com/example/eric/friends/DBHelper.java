@@ -4,13 +4,10 @@ package com.example.eric.friends;
  * Created by Eric on 3/24/2015.
  */
 
-import android.app.Activity;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -39,10 +36,9 @@ public class DBHelper extends SQLiteOpenHelper {
         String CREATE_FRIENDS_TABLE = "CREATE TABLE " +
                 TABLE_FRIENDS + "("
                 + COLUMN_ID + " INTEGER PRIMARY KEY," + COLUMN_NAME
-                + " TEXT," + COLUMN_EMAIL + " TEXT," + COLUMN_PHONENO + "TEXT" + ")"
-                + ctx.getString(R.string.insert);
+                + " TEXT," + COLUMN_EMAIL + " TEXT," + COLUMN_PHONENO + "TEXT" + ")";
         db.execSQL(CREATE_FRIENDS_TABLE);
-        //query();
+        Toast.makeText(ctx, "lol", Toast.LENGTH_LONG);
 
     }
 
@@ -52,27 +48,6 @@ public class DBHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-
-    /*
-    public void query(){
-        String query = "Select name FROM " + TABLE_FRIENDS;
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor =  db.rawQuery(query, null);
-        if (cursor.moveToFirst()) {
-            do {
-                cursor.moveToFirst();
-                String Name = cursor.getString(cursor.getColumnIndex("Name"));
-                email[count] = cursor.getString(cursor.getColumnIndex("Email"));
-                phoneno[count] = cursor.getString(cursor.getColumnIndex("PhoneNumber"));
-                results.add(Name);
-                count++;
-            } while (cursor.moveToNext());
-            db.close();
-            Toast.makeText(context.getApplicationContext(), "Done",
-                    Toast.LENGTH_SHORT).show();
-        }
-    }
-    */ //Note: don't think this will work here
 
 
     public List<Friends> getAllContacts() {
