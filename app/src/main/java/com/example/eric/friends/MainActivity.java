@@ -24,8 +24,6 @@ public class MainActivity extends ActionBarActivity {
         DBHelper db = new DBHelper(this, null, null, 1);
 
         List<Friends> friends = db.getAllContacts();
-        db.getAllContacts();
-
         ListView lv = (ListView) findViewById(R.id.list);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, ArrayofName);
         lv.setAdapter(adapter);
@@ -56,7 +54,6 @@ public class MainActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
 
 
 }

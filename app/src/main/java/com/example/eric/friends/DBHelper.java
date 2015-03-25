@@ -50,10 +50,13 @@ public class DBHelper extends SQLiteOpenHelper {
     public List<Friends> getAllContacts() {
         List<Friends> friendList = new ArrayList<Friends>();
         // Select All Query
-        String selectQuery = "SELECT name FROM " + TABLE_FRIENDS;
+        String selectQuery = "SELECT * FROM " + TABLE_FRIENDS;
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst() == false)
+            Toast.makeText(ctx, "Empty", Toast.LENGTH_SHORT).show();
 
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
@@ -72,7 +75,6 @@ public class DBHelper extends SQLiteOpenHelper {
         }
 
         // return contact list
-        Toast.makeText(ctx, "Why won't this work? :(", Toast.LENGTH_SHORT).show();
         db.close();
         return friendList;
     }
