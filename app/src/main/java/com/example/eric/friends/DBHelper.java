@@ -8,6 +8,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -71,6 +72,8 @@ public class DBHelper extends SQLiteOpenHelper {
         }
 
         // return contact list
+        Toast.makeText(ctx, "Why won't this work? :(", Toast.LENGTH_SHORT).show();
+        db.close();
         return friendList;
     }
 }
