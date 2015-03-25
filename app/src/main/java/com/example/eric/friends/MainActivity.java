@@ -26,10 +26,6 @@ public class MainActivity extends ActionBarActivity {
         ListView lv = (ListView) findViewById(R.id.list);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, ArrayofName);
         lv.setAdapter(adapter);
-
-        // Toast.makeText(getBaseContext(), ArrayofName + "", Toast.LENGTH_SHORT).show();
-
-
     }
 
     @Override
