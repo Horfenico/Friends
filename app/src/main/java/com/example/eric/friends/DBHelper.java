@@ -79,7 +79,13 @@ public class DBHelper extends SQLiteOpenHelper {
                 friends.setPhoneNo(cursor.getString(num));
 
                 String name = cursor.getString(nm);
+                String email = cursor.getString(em);
+                String phone = cursor.getString(num);
+
                 MainActivity.ArrayofName.add(name);
+                MainActivity.ArrayofEmail.add(email);
+                MainActivity.ArrayofNum.add(phone);
+
                 // Adding contact to list
                 friendList.add(friends);
             } while (cursor.moveToNext());
