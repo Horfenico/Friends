@@ -6,7 +6,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +27,7 @@ public class MainActivity extends ActionBarActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, ArrayofName);
         lv.setAdapter(adapter);
 
-        Toast.makeText(getBaseContext(), ArrayofName + "", Toast.LENGTH_SHORT).show();
+        // Toast.makeText(getBaseContext(), ArrayofName + "", Toast.LENGTH_SHORT).show();
 
 
     }
