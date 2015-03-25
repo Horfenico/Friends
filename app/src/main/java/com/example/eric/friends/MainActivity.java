@@ -1,11 +1,7 @@
 package com.example.eric.friends;
 
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteException;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
@@ -18,7 +14,6 @@ import java.util.List;
 public class MainActivity extends ActionBarActivity {
 
     public static ArrayList<String> ArrayofName = new ArrayList<String>();
-    private ListView lv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +25,7 @@ public class MainActivity extends ActionBarActivity {
         List<Friends> friends = db.getAllContacts();
         db.getAllContacts();
 
-        lv = (ListView) findViewById(R.id.list);
+        ListView lv = (ListView) findViewById(R.id.list);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, ArrayofName);
         lv.setAdapter(adapter);
 

@@ -8,7 +8,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,8 +37,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 + COLUMN_ID + " INTEGER PRIMARY KEY," + COLUMN_NAME
                 + " TEXT," + COLUMN_EMAIL + " TEXT," + COLUMN_PHONENO + "TEXT" + ")";
         db.execSQL(CREATE_FRIENDS_TABLE);
-        Toast.makeText(ctx, "lol", Toast.LENGTH_LONG);
-
+        db.execSQL(ctx.getString(R.string.insert));
     }
 
     @Override
@@ -47,8 +45,6 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_FRIENDS);
         onCreate(db);
     }
-
-
 
     public List<Friends> getAllContacts() {
         List<Friends> friendList = new ArrayList<Friends>();
