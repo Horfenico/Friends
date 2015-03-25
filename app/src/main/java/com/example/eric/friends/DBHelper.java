@@ -14,6 +14,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class DBHelper extends SQLiteOpenHelper {
@@ -72,6 +73,35 @@ public class DBHelper extends SQLiteOpenHelper {
         }
     }
     */ //Note: don't think this will work here
+
+
+    public List<Friends> getAllContacts() {
+        List<Friends> friendList = new ArrayList<Friends>();
+        // Select All Query
+        String selectQuery = "SELECT name FROM " + TABLE_FRIENDS;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                Friends friends = new Friends();
+                friends.setID(Integer.parseInt(cursor.getString(0)));
+                friends.setName(cursor.getString(1));
+                friends.setEmail(cursor.getString(2));
+                friends.setPhoneNo(cursor.getString(3));
+
+                String name = cursor.getString(1);
+                MainActivity.ArrayofName.add(name);
+                // Adding contact to list
+                friendList.add(friends);
+            } while (cursor.moveToNext());
+        }
+
+        // return contact list
+        return friendList;
+    }
 }
 
 

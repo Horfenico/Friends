@@ -12,27 +12,30 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class MainActivity extends ActionBarActivity {
 
-    private ArrayList<String> results = new ArrayList<String>();
-    private String[] email;
-    private String[] phoneno;
-    private int count = 0;
-
-    private String tableName = "Friends";
-    private SQLiteDatabase newDB;
+    public static ArrayList<String> ArrayofName = new ArrayList<String>();
+    private ListView lv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        openAndQueryDatabase();
-        displayResultList();
+
+        DBHelper db = new DBHelper(this, null, null, 1);
+
+        List<Friends> friends = db.getAllContacts();
+        db.getAllContacts();
+
+        lv = (ListView) findViewById(R.id.list);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, ArrayofName);
+        lv.setAdapter(adapter);
+
 
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -56,39 +59,6 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void displayResultList() {
-        ListView lv = (ListView) findViewById(R.id.list);
-        ArrayAdapter aa = new ArrayAdapter(this, R.layout.activity_main, results);
-        lv.setAdapter(aa);
-    }
 
-    private void openAndQueryDatabase() {
-        try {
-            DBHelper dbHelper = new DBHelper(this, null, null, 1);
-            newDB = dbHelper.getWritableDatabase();
-            Cursor c = newDB.rawQuery("SELECT Name FROM " +
-                    tableName, null);
-
-            if (c != null) {
-                if (c.moveToFirst()) {
-                    do {
-                        c.moveToFirst();
-                        String Name = c.getString(c.getColumnIndex("Name"));
-                        email[count] = c.getString(c.getColumnIndex("Email"));
-                        phoneno[count] = c.getString(c.getColumnIndex("PhoneNumber"));
-                        results.add(Name);
-                        count++;
-                    } while (c.moveToNext());
-                }
-            }
-        } catch (SQLiteException se) {
-            Log.e(getClass().getSimpleName(), "Could not create or Open the database");
-        } finally {
-            if (newDB != null)
-                newDB.execSQL("DELETE FROM " + tableName);
-        }
-        newDB.close();
-
-    }
 
 }
